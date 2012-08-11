@@ -45,6 +45,7 @@ class User extends CActiveRecord
 			array('username', 'length', 'max'=>60),
 			array('password', 'length', 'max'=>100),
 			array('email', 'length', 'max'=>45),
+                        array('email', 'email'), // validates correct email
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, username, password, email', 'safe', 'on'=>'search'),
@@ -99,19 +100,18 @@ class User extends CActiveRecord
 	}
 
 
-    protected function beforeSave()
-    {
-        parent::beforeSave();
+        protected function beforeSave()
+        {
+            parent::beforeSave();
 
-        $this->password = $this->encrypt($this->password);
+            $this->password = $this->encryptPassword($this->password);
 
-        return true;
-    }
+            return true;
+        }
 
-    // función de ejemplo
-    protected function encrypt($passwd, $method = 'md5')
-    {
-        return $method($passwd);
-    }
-    
+        // función de ejemplo
+        public function encryptPassword($password, $method = 'md5')
+        {
+            return $method($password);
+        }
 }
