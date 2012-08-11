@@ -111,7 +111,7 @@ class User extends CActiveRecord
     // función de ejemplo
     protected function encrypt($passwd, $method = 'md5')
     {
-        return md5($passwd);
+        return $method($passwd);
     }
     
 }
