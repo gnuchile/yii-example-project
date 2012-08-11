@@ -29,13 +29,37 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'fecha_creacion'); ?>
-		<?php echo $form->textField($model,'fecha_creacion'); ?>
+		<?php 
+//             echo $form->textField($model,'fecha_creacion');
+    $this->widget('zii.widgets.jui.CJuiDatePicker', array(
+            'name'=>'Post[fecha_creacion]',
+            'value'=>$model->getFecha(),//!$model->isNewRecord ? $model->fecha_creacion : '',
+            // additional javascript options for the date picker plugin
+            'options'=>array(
+                'showAnim'=>'fold',
+                'changeMonth'=>true,
+                'changeYear'=>true,
+                'dateFormat'=>'yy-mm-dd',
+            ),
+            'language'=>'es',
+            'htmlOptions'=>array(
+                'style'=>'height:20px;',
+                'readonly'=>true,
+            ),
+        ));
+        ?>
 		<?php echo $form->error($model,'fecha_creacion'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'user_id'); ?>
-		<?php echo $form->textField($model,'user_id'); ?>
+		<?php 
+    //echo $form->textField($model,'user_id'); 
+            echo $form->dropDownList($model, 'user_id',
+                CHtml::listData(User::model()->findAll(), 'id', 'username'),
+                array('prompt'=>'Elija usuario...')
+            );
+        ?>
 		<?php echo $form->error($model,'user_id'); ?>
 	</div>
 

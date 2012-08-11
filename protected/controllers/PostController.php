@@ -94,6 +94,8 @@ class PostController extends Controller
 		if(isset($_POST['Post']))
 		{
 			$model->attributes=$_POST['Post'];
+//            $model->fecha_creacion = $_POST['publishDate'];
+            //print_r($_POST['Post']);exit;
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}

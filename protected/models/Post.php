@@ -32,7 +32,7 @@ class Post extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'post';
+		return '{{post}}';
 	}
 
 	/**
@@ -43,7 +43,7 @@ class Post extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('titulo, contenido, fecha_creacion', 'required'),
+			array('titulo, contenido, fecha_creacion, user_id', 'required'),
 			array('user_id', 'numerical', 'integerOnly'=>true),
 			array('titulo', 'length', 'max'=>120),
 			// The following rule is used by search().
@@ -101,4 +101,10 @@ class Post extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+
+    public function getFecha()
+    {
+        if($this->isNewRecord) return '';
+        else return $this->fecha_creacion;
+    }
 }
