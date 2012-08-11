@@ -97,4 +97,21 @@ class User extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+
+
+    protected function beforeSave()
+    {
+        parent::beforeSave();
+
+        $this->password = $this->encrypt($this->password);
+
+        return true;
+    }
+
+    // función de ejemplo
+    protected function encrypt($passwd, $method = 'md5')
+    {
+        return md5($passwd);
+    }
+    
 }
